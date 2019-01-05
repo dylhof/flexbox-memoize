@@ -6,7 +6,7 @@ function Feedback(props) {
       <h3> {props.message} </h3>
       <p> property </p>
       <p> description </p>
-      <button onclick={props.updateQuestion}> Next Question </button>
+      <button onclick={props.resetAnswerGiven}> Next Question </button>
     </div>
     )
 }

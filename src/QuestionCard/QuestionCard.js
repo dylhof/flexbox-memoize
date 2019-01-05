@@ -11,6 +11,11 @@ class QuestionCard extends Component {
     }
   }
 
+  resetAnswerGiven = () => {
+    this.setState({ answerGiven: false });
+    this.props.updateQuestion();
+  }
+
   render() {
     return(
     <div>
@@ -21,10 +26,13 @@ class QuestionCard extends Component {
         <Question currentQuestion={this.props.currentQuestion}/>
       }
       {this.props.quizStarted && this.state.answerGiven && !this.state.answerCorrect &&
-        <Feedback message='Not Quite...'/>
+        <Feedback 
+          message='Not Quite...'
+          updateQuestion={this.resetAnswerGiven}/>
       }
       {this.props.quizStarted && this.state.answerGiven && this.state.answerCorrect &&
-        <Feedback message='Correct!'/>
+        <Feedback message='Correct!'
+        updateQuestion={this.resetAnswerGiven}/>
       }
     </div>
     )

@@ -9,18 +9,39 @@ class App extends Component {
     this.state = {
       answeredQuestions: 0,
       correctAnswers: 0,
-      currentQuestion: {
-        "property": "flex-direction: column-reverse",
-        "correctAnswer": "flex-direction-column-reverse.png",
-        "answers": ["flex-direction-column-reverse.png", "flex-direction-column.png", "flex-direction-row.png", "justify-content-flex-end.png"],
-        "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using column reverse organizes the items from bottom to top.",
+      quizStarted: false,
+      showInfo: false,
+      questions: [{
+        "property": "flex-direction: row",
+        "correctAnswer": "flex-direction-row.png",
+        "answers": ["flex-direction-row.png", "flex-direction-column.png", "justify-content-flex-end.png", "flex-direction-row-reverse.png"],
+        "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using row organizes the items from left to right.",
         "family-member": "Parent",
         "model": "Flexbox"
       },
-      quizStarted: false,
-      showInfo: false,
-      questions: []
+      {
+        "property": "flex-direction: column",
+        "correctAnswer": "flex-direction-column.png",
+        "answers": ["flex-direction-column.png", "flex-direction-row.png", "justify-content-flex-end.png", "flex-direction-column-reverse.png"],
+        "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using Column organizes the items from top to bottom.",
+        "family-member": "Parent",
+        "model": "Flexbox"
+      },
+      {
+        "property": "flex-direction: row-reverse",
+        "correctAnswer": "flex-direction-row-reverse.png",
+        "answers": ["flex-direction-row-reverse.png", "flex-direction-column.png", "justify-content-flex-end.png", "flex-direction-row.png"],
+        "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using row reverse organizes the items from right to left.",
+        "family-member": "Parent",
+        "model": "Flexbox"
+      }],
+      currentQuestion: {},
+
     }
+  }
+
+  updateQuestion = () => {
+    this.setState({ currentQuestion: this.state.questions[this.state.answeredQuestions]})
   }
 
   toggleShowInfo = () => {
@@ -28,6 +49,7 @@ class App extends Component {
   }
 
   startQuiz = () => {
+    this.setState({ currentQuestion: this.state.questions[0] });
     this.setState({ quizStarted: true });
   }
 
@@ -45,7 +67,8 @@ class App extends Component {
         <QuestionCard 
           currentQuestion={this.state.currentQuestion}
           quizStarted={this.state.quizStarted}
-          startQuiz={this.startQuiz}/>
+          startQuiz={this.startQuiz}
+          updateQuestion={this.updateQuestion}/>
       
       </div>
     );
