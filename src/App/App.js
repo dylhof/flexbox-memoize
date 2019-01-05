@@ -13,8 +13,8 @@ class App extends Component {
       showInfo: false,
       questions: [{
         "property": "flex-direction: row",
-        "correctAnswer": "flex-direction-row.png",
-        "answers": ["flex-direction-row.png", "flex-direction-column.png", "justify-content-flex-end.png", "flex-direction-row-reverse.png"],
+        "correctAnswer": "https://i.imgur.com/Xo1MD86.png",
+        "answers": ["https://i.imgur.com/Xo1MD86.png", "flex-direction-column.png", "justify-content-flex-end.png", "flex-direction-row-reverse.png"],
         "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using row organizes the items from left to right.",
         "family-member": "Parent",
         "model": "Flexbox"
@@ -38,6 +38,11 @@ class App extends Component {
       currentQuestion: {},
 
     }
+  }
+
+  setAnsweredQuestions = () => {
+    this.setState({ answeredQuestions: this.state.answeredQuestions + 1 });
+    this.updateQuestion();
   }
 
   updateQuestion = () => {
@@ -68,7 +73,7 @@ class App extends Component {
           currentQuestion={this.state.currentQuestion}
           quizStarted={this.state.quizStarted}
           startQuiz={this.startQuiz}
-          updateQuestion={this.updateQuestion}/>
+          setAnsweredQuestions={this.setAnsweredQuestions}/>
       
       </div>
     );

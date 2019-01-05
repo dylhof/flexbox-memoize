@@ -15,6 +15,7 @@ function Question(props) {
               src={answer}
               alt={answer}
               key={answer}
+              onClick={props.checkAnswer}
             />
           );
         })}
