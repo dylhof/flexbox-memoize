@@ -21,7 +21,7 @@ class QuestionCard extends Component {
   }
   
   setAnswerGiven = () => {
-    this.setState({ answerGiven: true })
+    this.setState({ answerGiven: true });
   }
 
   resetAnswerGiven = () => {
