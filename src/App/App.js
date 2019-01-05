@@ -41,7 +41,7 @@ class App extends Component {
   }
 
   setAnsweredQuestions = () => {
-    this.setState({ answeredQuestions: this.state.answeredQuestions + 1 });
+    this.setState({ answeredQuestions: this.state.answeredQuestions += 1 });
     this.updateQuestion();
   }
 

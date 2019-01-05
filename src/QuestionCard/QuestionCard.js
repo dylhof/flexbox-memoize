@@ -12,7 +12,6 @@ class QuestionCard extends Component {
   }
 
   checkAnswer = (event) => {
-    console.log(event.target.src, this.props.currentQuestion.correctAnswer);
     if(this.props.currentQuestion.correctAnswer === event.target.src) {
       this.setState({ answerCorrect: true });
     };
@@ -21,6 +20,7 @@ class QuestionCard extends Component {
 
   resetAnswerGiven = () => {
     this.setState({ answerGiven: false });
+    // this.setState({ answerCorrect: false })
     this.props.setAnsweredQuestions();
   }
 
@@ -43,7 +43,8 @@ class QuestionCard extends Component {
       }
       {this.props.quizStarted && this.state.answerGiven && this.state.answerCorrect &&
         <Feedback message='Correct!'
-        resetAnswerGiven={this.resetAnswerGiven}/>
+        resetAnswerGiven={this.resetAnswerGiven}
+        currentQuestion={this.props.currentQuestion}/>
       }
     </div>
     )
