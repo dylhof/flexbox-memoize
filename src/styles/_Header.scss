@@ -1,0 +1,18 @@
+header {
+  grid-area: header;
+  display: flex;
+  justify-content: space-between;
+  font-family: $primary;
+}
+
+h1 {
+  font-size: 55px;
+  color: $text-green; 
+  margin-left: 20px;
+}
+
+.fa-question-circle {
+  font-size: 40px;
+  margin: 20px;
+  color: $text-green;
+}

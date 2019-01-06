@@ -31,9 +31,9 @@ class QuestionCard extends Component {
 
   render() {
     return(
-    <div>
+    <div className='question-card'>
       {!this.props.quizStarted && 
-        <button onClick={this.props.startQuiz}>Start Quiz</button>
+        <button className='start-button' onClick={this.props.startQuiz}>Start Quiz</button>
       }
       {this.props.quizStarted && !this.state.answerGiven && !this.props.endOfQuiz &&
         <Question 
