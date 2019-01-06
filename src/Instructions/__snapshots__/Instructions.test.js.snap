@@ -21,7 +21,7 @@ exports[`Instructions should match the snapshot 1`] = `
       </li>
     </ol>
     <i
-      class="far fa-times-circle"
+      className="far fa-times-circle"
       onClick={[MockFunction]}
     />
   </div>

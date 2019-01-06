@@ -17,4 +17,9 @@ describe('Instructions', () => {
   it('should match the snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   })
+
+  it('should call toggle show instructions when x is clicked', () => {
+    wrapper.find('i').simulate('click');
+    expect(toggleShowInstructionsMock).toBeCalled();
+  })
 })

@@ -12,7 +12,7 @@ function Instructions(props) {
           <li>If you get stuck, check the sidebar to get more information about the flexbox property</li>
           <li>Enjoy creating simple layouts with flexbox!</li>
         </ol>
-        <i class="far fa-times-circle" onClick={props.toggleShowInstructions}></i>
+        <i className="far fa-times-circle" onClick={props.toggleShowInstructions}></i>
       </div>
       }
     </div>
