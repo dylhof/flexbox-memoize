@@ -1,5 +1,6 @@
 import React from 'react';
 import Info from './Info';
+// import Instructions from '../Instructions/Instuructions.js'
 import { shallow } from 'enzyme';
 
 const question = {
@@ -26,4 +27,25 @@ describe('Info', () => {
   it('should match the snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   })
+
+  it('should match the snapshot', () => {
+    let wrapper = shallow(
+      <Info 
+        currentQuestion={question}
+        showInfo={false}
+        quizStarted={false}/>
+    )
+    expect(wrapper).toMatchSnapshot();
+  })
+
+  it('should', () => {
+    let wrapper = shallow(
+      <Info 
+        currentQuestion={question}
+        showInfo={true}
+        quizStarted={false}/>
+    )
+    expect(wrapper).toMatchSnapshot();
+  })
+
 })

@@ -1,5 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Info should 1`] = `
+<div>
+  <div>
+    <p>
+      Instructions
+    </p>
+    <ol>
+      <li>
+        Click StartQuiz
+      </li>
+      <li>
+        Choose the image that may be produced if the named flexbox property were in your CSS
+      </li>
+      <li>
+        If you get stuck, check back here to get more information about the flexbox property
+      </li>
+      <li>
+        Enjoy creating simple layouts with flexbox!
+      </li>
+    </ol>
+  </div>
+</div>
+`;
+
 exports[`Info should match the snapshot 1`] = `
 <div>
   <p>
@@ -8,5 +32,29 @@ exports[`Info should match the snapshot 1`] = `
       flex-direction: row
     </span>
   </p>
+</div>
+`;
+
+exports[`Info should match the snapshot 2`] = `
+<div>
+  <div>
+    <p>
+      Instructions
+    </p>
+    <ol>
+      <li>
+        Click StartQuiz
+      </li>
+      <li>
+        Choose the image that may be produced if the named flexbox property were in your CSS
+      </li>
+      <li>
+        If you get stuck, check back here to get more information about the flexbox property
+      </li>
+      <li>
+        Enjoy creating simple layouts with flexbox!
+      </li>
+    </ol>
+  </div>
 </div>
 `;
