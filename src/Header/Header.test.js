@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from './Header';
 import { shallow } from 'enzyme';
-import { isMainThread } from 'worker_threads';
 
 describe('Header', () => {
   let wrapper;
@@ -16,6 +15,10 @@ describe('Header', () => {
   })
 
   it('should toggle showInstructions', () => {
-    
+    expect(wrapper.state('showInstructions')).toEqual(false);
+    wrapper.instance().toggleShowInstructions();
+    expect(wrapper.state('showInstructions')).toEqual(true);
+    wrapper.instance().toggleShowInstructions();
+    expect(wrapper.state('showInstructions')).toEqual(false);
   })
 })

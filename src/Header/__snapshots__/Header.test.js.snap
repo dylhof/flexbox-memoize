@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should match the snapshot 1`] = `
+<header
+  className="App-header"
+>
+  <h1>
+    FlexboxQuiz
+  </h1>
+  <i
+    className="far fa-question-circle"
+    onClick={[Function]}
+  />
+  <Instructions
+    showInstructions={false}
+    toggleShowInstructions={[Function]}
+  />
+</header>
+`;
