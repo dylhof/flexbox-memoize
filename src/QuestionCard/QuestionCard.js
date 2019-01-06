@@ -35,7 +35,7 @@ class QuestionCard extends Component {
       {!this.props.quizStarted && 
         <button onClick={this.props.startQuiz}>Start Quiz</button>
       }
-      {this.props.quizStarted && !this.state.answerGiven && 
+      {this.props.quizStarted && !this.state.answerGiven && !this.props.endOfQuiz &&
         <Question 
           currentQuestion={this.props.currentQuestion}
           checkAnswer={this.checkAnswer}/>
@@ -50,6 +50,14 @@ class QuestionCard extends Component {
         <Feedback message='Correct!'
         resetAnswerGiven={this.resetAnswerGiven}
         currentQuestion={this.props.currentQuestion}/>
+      }
+      {this.props.endOfQuiz && 
+        <div> 
+          <h3>Your Score:</h3>
+          <p>{this.props.correctAnswers} Correct Answers</p>
+          <p>{this.props.answeredQuestions} Questions Answered</p>
+          <button onClick={this.props.startQuiz}>Restart Quiz!</button>
+        </div>
       }
     </div>
     )
