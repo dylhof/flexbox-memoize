@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Info should match the snapshot 1`] = `
+<div>
+  <p>
+    Click Here to show more info about:
+    <span>
+      flex-direction: row
+    </span>
+  </p>
+</div>
+`;
