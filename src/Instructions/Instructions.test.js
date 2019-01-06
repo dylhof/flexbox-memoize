@@ -13,4 +13,8 @@ describe('Instructions', () => {
         toggleShowInstructions={toggleShowInstructionsMock}/>
     )
   })
+  
+  it('should match the snapshot', () => {
+    expect(wrapper).toMatchSnapshot();
+  })
 })
