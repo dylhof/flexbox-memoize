@@ -54,7 +54,6 @@ class App extends Component {
     this.setState({ 
       answeredQuestions: (this.state.answeredQuestions + 1) 
     }, this.updateQuestion);
-    
   }
 
   updateQuestion = () => {
