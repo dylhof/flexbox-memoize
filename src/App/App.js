@@ -68,6 +68,7 @@ class App extends Component {
   setEndOfQuiz = () => {
     this.setState({ endOfQuiz: true });
     this.setState({ answeredQuestions: 0 })
+    this.setState({ quizStarted: false });
   }
 
   toggleShowInfo = () => {
