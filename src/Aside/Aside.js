@@ -3,7 +3,7 @@ import Info from '../Info/Info.js';
 
 function Aside(props) {
   return (
-    <aside>
+    <aside className='info-aside'>
       <div> 
         <h3>Your Score:</h3>
         <p>{props.correctAnswers} Correct Answers</p>
