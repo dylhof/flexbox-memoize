@@ -1,0 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: 1.3fr 4fr;
+  grid-template-rows: 110px 1fr;
+  grid-template-areas: 'header header'
+                       'aside question';
+}
