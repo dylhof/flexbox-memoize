@@ -10,5 +10,8 @@ describe('Aside', () => {
     )
   });
 
-  it('should match the snapshot', ())
+  it('should match the snapshot', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+  
 })
