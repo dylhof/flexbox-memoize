@@ -15,13 +15,14 @@ function Info(props) {
           </div>
         }
         {props.quizStarted && !props.showInfo && 
-            <p onClick={props.toggleShowInfo}>
+            <p className='show-more-info-p' onClick={props.toggleShowInfo}>
               Click Here to show more info about: 
               <span>{props.currentQuestion.property}</span> 
             </p>    
         }
         {props.quizStarted && props.showInfo && 
-            <p onClick={props.toggleShowInfo}>
+            <p className='property-info-p' onClick={props.toggleShowInfo}>
+              {props.currentQuestion.property}
               {props.currentQuestion.info}
             </p>
         }

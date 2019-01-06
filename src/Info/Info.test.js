@@ -20,7 +20,8 @@ describe('Info', () => {
       <Info 
         currentQuestion={question}
         showInfo={false}
-        quizStarted={true}/>
+        quizStarted={true}
+        toggleShowInfo={toggleShowInfoMock}/>
     )
   })
 
@@ -38,7 +39,7 @@ describe('Info', () => {
     expect(wrapper).toMatchSnapshot();
   })
 
-  it('should', () => {
+  it('should match the snapshot', () => {
     let wrapper = shallow(
       <Info 
         currentQuestion={question}
@@ -48,4 +49,8 @@ describe('Info', () => {
     expect(wrapper).toMatchSnapshot();
   })
 
+  it('should call toggleShowInfo when clicked', () => {
+    wrapper.find('.show-more-info-p').simulate('click');
+    expect(toggleShowInfoMock).toBeCalled();
+  })
 })
