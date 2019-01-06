@@ -57,6 +57,10 @@ class App extends Component {
     
   }
 
+  setCorrectAnswers = () => {
+    this.setState({ correctAnswers: (this.state.correctAnswers + 1)})
+  }
+
   updateQuestion = () => {
     if (this.state.answeredQuestions < this.state.questions.length) {
       this.setState({ currentQuestion: this.state.questions[this.state.answeredQuestions]})
@@ -68,6 +72,7 @@ class App extends Component {
   setEndOfQuiz = () => {
     this.setState({ endOfQuiz: true });
     this.setState({ answeredQuestions: 0 })
+    this.setState({ correctAnswers: 0 })
     this.setState({ quizStarted: false });
   }
 
@@ -97,6 +102,7 @@ class App extends Component {
           quizStarted={this.state.quizStarted}
           startQuiz={this.startQuiz}
           setAnsweredQuestions={this.setAnsweredQuestions}
+          setCorrectAnswers={this.setCorrectAnswers}
           setEndOfQuiz={this.setEndOfQuiz}
           endOfQuiz={this.state.endOfQuiz}/>
       
