@@ -156,23 +156,41 @@ class App extends Component {
           showInfo={this.state.showInfo}
           quizStarted={this.state.quizStarted}
           toggleShowInfo={this.toggleShowInfo}/>
+        
+        {!this.state.quizStarted && !this.state.endOfQuiz &&
+        <div>
+          <button className='start-button' onClick={this.newQuestionOrder}>Start New Quiz</button>
+          
+          {(this.state.incorrect.length !== 0) && 
+            (this.answeredQuestions === this.state.questions.length) &&
+            <button onClick={this.reviewIncorrect}>Retry questions I got wrong</button>}
+          
+          {(this.state.answeredQuestions > 0) && 
+          (this.state.answeredQuestions < this.state.questions.length) && 
+          <button onClick={this.startFromWhereILeftOff}>Start Quiz Where I left off</button>}
+        </div>
+      }
+
+      {this.state.quizStarted && !this.state.endOfQuiz &&
         <QuestionCard 
           currentQuestion={this.state.currentQuestion}
-          quizStarted={this.state.quizStarted}
           setAnsweredQuestions={this.setAnsweredQuestions}
           setCorrectAnswers={this.setCorrectAnswers}
-          newQuestionOrder={this.newQuestionOrder}
-          endOfQuiz={this.state.endOfQuiz}
-          questions={this.state.questions.length}
-          answeredQuestions={this.state.answeredQuestions}
-          correctAnswers={this.state.correctAnswers}
           randomAnswers={this.state.randomAnswers}
           setCorrect={this.setCorrect}
-          setIncorrect={this.setIncorrect}
-          reviewIncorrect={this.reviewIncorrect}
-          areThereIncorrect={this.state.incorrect.length}
-          startFromWhereILeftOff={this.startFromWhereILeftOff}/>
-      
+          setIncorrect={this.setIncorrect}/>
+      }
+
+      {this.state.endOfQuiz && 
+        <div> 
+          <h3>Your Score:</h3>
+          <p>{this.state.correctAnswers} Correct Answers</p>
+          <p>{this.state.answeredQuestions} Questions Answered</p>
+          <button onClick={this.newQuestionOrder}>Restart New Quiz!</button>
+          {(this.state.incorrect.length !== 0) && 
+          <button onClick={this.reviewIncorrect}>Retry questions I got wrong</button>}
+        </div>
+      }
       </div>
     );
   }
