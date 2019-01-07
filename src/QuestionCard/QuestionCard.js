@@ -11,6 +11,11 @@ class QuestionCard extends Component {
     }
   }
 
+  checkQuestionsRemaining = () => {
+    if(this.props.answeredQuestions < this.props.questions){
+    }
+  }
+
   checkAnswer = (event) => {
     if(this.props.currentQuestion.correctAnswer === event.target.src) {
       this.setState({ answerCorrect: true });
@@ -24,7 +29,7 @@ class QuestionCard extends Component {
   setAnswerGiven = () => {
     this.setState({ answerGiven: true });
   }
-
+  
   resetAnswerGiven = () => {
     this.setState({ answerGiven: false });
     this.props.setAnsweredQuestions();
@@ -33,13 +38,14 @@ class QuestionCard extends Component {
   render() {
     return(
     <div className='question-card'>
-      {!this.props.quizStarted && 
+      {!this.props.quizStarted && !this.props.endofQuiz &&
         <button className='start-button' onClick={this.props.startQuiz}>Start Quiz</button>
       }
       {this.props.quizStarted && !this.state.answerGiven && !this.props.endOfQuiz &&
         <Question 
           currentQuestion={this.props.currentQuestion}
-          checkAnswer={this.checkAnswer}/>
+          checkAnswer={this.checkAnswer}
+          randomAnswers={this.props.randomAnswers}/>
       }
       {this.props.quizStarted && this.state.answerGiven && !this.state.answerCorrect &&
         <Feedback 
@@ -57,7 +63,7 @@ class QuestionCard extends Component {
           <h3>Your Score:</h3>
           <p>{this.props.correctAnswers} Correct Answers</p>
           <p>{this.props.answeredQuestions} Questions Answered</p>
-          <button onClick={this.props.startQuiz}>Restart Quiz!</button>
+          <button onClick={this.props.resetQuiz}>Restart Quiz!</button>
         </div>
       }
     </div>

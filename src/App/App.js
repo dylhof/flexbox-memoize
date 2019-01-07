@@ -46,7 +46,7 @@ class App extends Component {
         "model": "Flexbox"
       }],
       currentQuestion: {},
-
+      randomAnswers: []
     }
   }
 
@@ -65,15 +65,15 @@ class App extends Component {
     if (this.state.answeredQuestions < this.state.questions.length) {
       this.setState({ currentQuestion: this.state.questions[this.state.answeredQuestions]})
     } else {
-      this.setEndOfQuiz();
+    this.setState({ endOfQuiz: true });
     }
   }
 
-  setEndOfQuiz = () => {
-    this.setState({ endOfQuiz: true });
+  resetQuiz = () => {
     this.setState({ answeredQuestions: 0 })
     this.setState({ correctAnswers: 0 })
     this.setState({ quizStarted: false });
+    this.startQuiz();
   }
 
   toggleShowInfo = () => {
@@ -81,9 +81,24 @@ class App extends Component {
   }
 
   startQuiz = () => {
-    this.setState({ currentQuestion: this.state.questions[0] });
+    this.setState({ currentQuestion: this.state.questions[0] }, () => {
+      this.randomAnswers(this.state.currentQuestion.answers)
+    });
     this.setState({ endOfQuiz: false })
     this.setState({ quizStarted: true });
+  }
+
+  randomAnswers = (answers) => {
+    let currentIndex = answers.length;
+    let temporaryValue, randomIndex;
+    while(0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = answers[currentIndex];
+      answers[currentIndex] = answers[randomIndex];
+      answers[randomIndex] = temporaryValue
+    }
+    this.setState({ randomAnswers: answers })
   }
 
   render() {
@@ -103,8 +118,12 @@ class App extends Component {
           startQuiz={this.startQuiz}
           setAnsweredQuestions={this.setAnsweredQuestions}
           setCorrectAnswers={this.setCorrectAnswers}
-          setEndOfQuiz={this.setEndOfQuiz}
-          endOfQuiz={this.state.endOfQuiz}/>
+          resetQuiz={this.resetQuiz}
+          endOfQuiz={this.state.endOfQuiz}
+          questions={this.state.questions.length}
+          answeredQuestions={this.state.answeredQuestions}
+          correctAnswers={this.state.correctAnswers}
+          randomAnswers={this.state.randomAnswers}/>
       
       </div>
     );
