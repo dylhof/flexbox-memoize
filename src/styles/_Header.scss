@@ -3,6 +3,7 @@ header {
   display: flex;
   justify-content: space-between;
   font-family: $primary;
+  background: linear-gradient($grey, #2B544B, $background-green);
 }
 
 h1 {
