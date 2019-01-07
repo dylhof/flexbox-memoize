@@ -8,70 +8,124 @@ class App extends Component {
     super();
     let storedCorrect = [];
     let storedIncorrect = [];
+    let storedAnsweredQuestions = 0;
+    let storedQuestions = [];
     if (localStorage.getItem('correct')) {
       storedCorrect = JSON.parse(localStorage.getItem('correct'));
     }
     if (localStorage.getItem('incorrect')) {
-      storedIncorrect = JSON.parse(localStorage.getItem('incorrect'))
+      storedIncorrect = JSON.parse(localStorage.getItem('incorrect'));
+    }
+    if (localStorage.getItem('answeredQuestions')) {
+      let storedAnsweredQuestionsString = JSON.parse(localStorage.getItem('answeredQuestions'));
+      storedAnsweredQuestions = parseInt(storedAnsweredQuestionsString);
+    }
+    if (localStorage.getItem('questions')) {
+      storedQuestions = JSON.parse(localStorage.getItem('questions'))
     }
     this.state = {
       correct: storedCorrect,
       incorrect: storedIncorrect,
-      answeredQuestions: 0,
-      correctAnswers: 0,
+      answeredQuestions: storedAnsweredQuestions,
+      correctAnswers: storedCorrect.length,
       endOfQuiz: false,
       quizStarted: false,
       showInfo: false,
-      questions: [
-        {
-        "property": "flex-direction: row",
-        "correctAnswer": "https://i.imgur.com/Xo1MD86.png",
-        "answers": [
-        "https://i.imgur.com/Xo1MD86.png",
-        "https://i.imgur.com/JIJHnVf.png",
-        "https://i.imgur.com/4y9cZDw.png",
-        "https://i.imgur.com/Id0kLlR.png"
-        ],
-        "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using row organizes the items from left to right.",
-        "family-member": "Parent",
-        "model": "Flexbox"
-        },
-        {
-        "property": "flex-direction: column",
-        "correctAnswer": "https://i.imgur.com/JIJHnVf.png",
-        "answers": [
-        "https://i.imgur.com/JIJHnVf.png",
-        "https://i.imgur.com/Xo1MD86.png",
-        "https://i.imgur.com/4y9cZDw.png",
-        "https://i.imgur.com/VdZUG9d.png"
-        ],
-        "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using Column organizes the items from top to bottom.",
-        "family-member": "Parent",
-        "model": "Flexbox"
-        }],
+      questions: storedQuestions,
+        // {
+        // "property": "flex-direction: row",
+        // "correctAnswer": "https://i.imgur.com/Xo1MD86.png",
+        // "answers": [
+        // "https://i.imgur.com/Xo1MD86.png",
+        // "https://i.imgur.com/JIJHnVf.png",
+        // "https://i.imgur.com/4y9cZDw.png",
+        // "https://i.imgur.com/Id0kLlR.png"
+        // ],
+        // "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using row organizes the items from left to right.",
+        // "family-member": "Parent",
+        // "model": "Flexbox"
+        // },
+        // {
+        // "property": "flex-direction: column",
+        // "correctAnswer": "https://i.imgur.com/JIJHnVf.png",
+        // "answers": [
+        // "https://i.imgur.com/JIJHnVf.png",
+        // "https://i.imgur.com/Xo1MD86.png",
+        // "https://i.imgur.com/4y9cZDw.png",
+        // "https://i.imgur.com/VdZUG9d.png"
+        // ],
+        // "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using Column organizes the items from top to bottom.",
+        // "family-member": "Parent",
+        // "model": "Flexbox"
+        // }],
       currentQuestion: {},
       randomAnswers: []
     }
   }
 
-  // componentDidMount() {
-  //   fetch('http://memoize-datasets.herokuapp.com/api/v1/flexboxData')
-  //     .then(questions => questions.json())
-  //     .then(parsedQuestions => this.setState({ questions: parsedQuestions.flexboxData }))
-  //     .catch(err => console.log('Oh No! Something is wrong!', err))
-  // }
+  componentDidMount() {
+    if (!localStorage.getItem('questions')) {
+      fetch('http://memoize-datasets.herokuapp.com/api/v1/flexboxData')
+        .then(questions => questions.json())
+        .then(parsedQuestions => this.setState({ questions: parsedQuestions.flexboxData }))
+        .catch(err => console.log('Oh No! Something is wrong!', err))
+    }
+  }
+
+  newQuestionOrder = () => {
+    this.randomize('questions', this.state.questions)
+  }
+
+  randomize = (key, array) => {
+    let currentIndex = array.length;
+    let temporaryValue, randomIndex;
+    while(0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue
+    }
+    this.setState({ [key]: array }, () => {
+      if(key === 'questions') {
+        localStorage.setItem('questions', JSON.stringify(this.state.questions));
+        this.resetQuiz();
+      }
+    })
+  }
+
+  resetQuiz = () => {
+    this.setState({ answeredQuestions: 0 }, this.updateQuestion);
+    this.setState({ correctAnswers: 0 })
+    this.setState({ quizStarted: false });
+    this.setState({ correct: [] });
+    this.setState({ incorrect: [] });
+    this.setState({ endOfQuiz: false });
+    this.setState({ quizStarted: true });
+    localStorage.removeItem('correct');
+    localStorage.removeItem('incorrect');
+    localStorage.removeItem('answeredQuestions');
+  }
 
   reviewIncorrect = () => {
     let incorrectQuestions = localStorage.getItem('incorrect');
     let parsedIncorrectQuestions = JSON.parse(incorrectQuestions);
-    console.log('parsed incorrect', parsedIncorrectQuestions)
     this.setState({ questions: parsedIncorrectQuestions }, 
       this.resetQuiz);
-    console.log('questions', this.state.questions);
   }
 
   saveToLocalStorage = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  setAnsweredQuestions = () => {
+    this.setState({ 
+      answeredQuestions: (this.state.answeredQuestions + 1) 
+    }, () => {
+    this.updateQuestion();
+    let storedAnsweredQuestions = JSON.stringify(this.state.answeredQuestions);
+    this.saveToLocalStorage('answeredQuestions', (storedAnsweredQuestions))
+    });
   }
 
   setCorrect = (question) => {
@@ -82,6 +136,10 @@ class App extends Component {
     });
   }
 
+  setCorrectAnswers = () => {
+    this.setState({ correctAnswers: (this.state.correctAnswers + 1)})
+  }
+
   setIncorrect = (question) => {
     let newIncorrect = this.state.incorrect.slice();
     newIncorrect.push(question);
@@ -90,60 +148,27 @@ class App extends Component {
     });
   }
 
-  setAnsweredQuestions = () => {
-    this.setState({ 
-      answeredQuestions: (this.state.answeredQuestions + 1) 
-    }, this.updateQuestion);
-  }
-
-  setCorrectAnswers = () => {
-    this.setState({ correctAnswers: (this.state.correctAnswers + 1)})
-  }
-
-  updateQuestion = () => {
-    if (this.state.answeredQuestions < this.state.questions.length) {
-      this.setState({ currentQuestion: this.state.questions[this.state.answeredQuestions]}, () => {
-        this.randomAnswers(this.state.currentQuestion.answers)
-      });
-    } else {
-    this.setState({ endOfQuiz: true });
-    }
-  }
-
-  resetQuiz = () => {
-    this.setState({ answeredQuestions: 0 })
-    this.setState({ correctAnswers: 0 })
-    this.setState({ quizStarted: false });
-    this.setState({ correct: [] });
-    this.setState({ incorrect: [] });
-    localStorage.removeItem('correct');
-    localStorage.removeItem('incorrect');
-    this.startQuiz();
+  startFromWhereILeftOff = () => {
+    this.setState({ currentQuestion: this.state.questions[this.state.answeredQuestions]}, () => {
+      this.randomize('randomAnswers', this.state.currentQuestion.answers)
+    });
+    this.setState({ endOfQuiz: false })
+    this.setState({ quizStarted: true });
   }
 
   toggleShowInfo = () => {
     this.setState({ showInfo: !this.state.showInfo })
   }
 
-  startQuiz = () => {
-    this.setState({ currentQuestion: this.state.questions[0] }, () => {
-      this.randomAnswers(this.state.currentQuestion.answers)
-    });
-    this.setState({ endOfQuiz: false })
-    this.setState({ quizStarted: true });
-  }
-
-  randomAnswers = (answers) => {
-    let currentIndex = answers.length;
-    let temporaryValue, randomIndex;
-    while(0 !== currentIndex) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      temporaryValue = answers[currentIndex];
-      answers[currentIndex] = answers[randomIndex];
-      answers[randomIndex] = temporaryValue
+  updateQuestion = () => {
+    if (this.state.answeredQuestions < this.state.questions.length) {
+      this.setState({ currentQuestion: this.state.questions[this.state.answeredQuestions]}, () => {
+        this.randomize('randomAnswers', this.state.currentQuestion.answers)
+      });
+    } else {
+    this.setState({ endOfQuiz: true });
     }
-    this.setState({ randomAnswers: answers })
+    this.setState({ showInfo: false });
   }
 
   render() {
@@ -160,10 +185,9 @@ class App extends Component {
         <QuestionCard 
           currentQuestion={this.state.currentQuestion}
           quizStarted={this.state.quizStarted}
-          startQuiz={this.startQuiz}
           setAnsweredQuestions={this.setAnsweredQuestions}
           setCorrectAnswers={this.setCorrectAnswers}
-          resetQuiz={this.resetQuiz}
+          newQuestionOrder={this.newQuestionOrder}
           endOfQuiz={this.state.endOfQuiz}
           questions={this.state.questions.length}
           answeredQuestions={this.state.answeredQuestions}
@@ -171,7 +195,9 @@ class App extends Component {
           randomAnswers={this.state.randomAnswers}
           setCorrect={this.setCorrect}
           setIncorrect={this.setIncorrect}
-          reviewIncorrect={this.reviewIncorrect}/>
+          reviewIncorrect={this.reviewIncorrect}
+          areThereIncorrect={this.state.incorrect.length}
+          startFromWhereILeftOff={this.startFromWhereILeftOff}/>
       
       </div>
     );

@@ -40,8 +40,18 @@ class QuestionCard extends Component {
   render() {
     return(
     <div className='question-card'>
-      {!this.props.quizStarted && !this.props.endofQuiz &&
-        <button className='start-button' onClick={this.props.startQuiz}>Start Quiz</button>
+      {!this.props.quizStarted && !this.props.endOfQuiz &&
+        <div>
+          <button className='start-button' onClick={this.props.newQuestionOrder}>Start New Quiz</button>
+          
+          {(this.props.areThereIncorrect !==0) && 
+            (this.props.answeredQuestions === this.props.questions) &&
+            <button onClick={this.props.reviewIncorrect}>Retry questions I got wrong</button>}
+          
+          {(this.props.answeredQuestions > 0) && 
+          (this.props.answeredQuestions < this.props.questions) && 
+          <button onClick={this.props.startFromWhereILeftOff}>Start Quiz Where I left off</button>}
+        </div>
       }
       {this.props.quizStarted && !this.state.answerGiven && !this.props.endOfQuiz &&
         <Question 
@@ -65,8 +75,9 @@ class QuestionCard extends Component {
           <h3>Your Score:</h3>
           <p>{this.props.correctAnswers} Correct Answers</p>
           <p>{this.props.answeredQuestions} Questions Answered</p>
-          <button onClick={this.props.resetQuiz}>Restart Quiz!</button>
-          <button onClick={this.props.reviewIncorrect}>Retry questions I got wrong</button>
+          <button onClick={this.props.newQuestionOrder}>Restart New Quiz!</button>
+          {(this.props.areThereIncorrect !== 0) && 
+          <button onClick={this.props.reviewIncorrect}>Retry questions I got wrong</button>}
         </div>
       }
     </div>
