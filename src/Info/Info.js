@@ -15,16 +15,22 @@ function Info(props) {
           </div>
         }
         {props.quizStarted && !props.showInfo && 
-            <p className='show-more-info-p' onClick={props.toggleShowInfo}>
+            <div onClick={props.toggleShowInfo}>
+              <p className='show-more-info-p'>
               Click Here to show more info about: 
-              <span>{props.currentQuestion.property}</span> 
-            </p>    
+              </p>
+              <p className='show-more-info-p'>{props.currentQuestion.property}
+              </p> 
+            </div>   
         }
         {props.quizStarted && props.showInfo && 
-            <p className='property-info-p' onClick={props.toggleShowInfo}>
-              {props.currentQuestion.property}
+          <div onClick={props.toggleShowInfo}>
+            <p className='property-property-p'>
+             {props.currentQuestion.property}</p>
+             <p className='property-info-p'>
               {props.currentQuestion.info}
             </p>
+          </div>
         }
       </div>
     )
