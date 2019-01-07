@@ -1,12 +1,11 @@
 .question-card {
+  @include divs($grey, $card-green, 500px, 700px);
   grid-area: question;
-  background-color: $card-green;
-  height: 500px;
-  width: 700px;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .start-button {
