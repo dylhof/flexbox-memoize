@@ -22,41 +22,17 @@ class App extends Component {
       endOfQuiz: false,
       quizStarted: false,
       showInfo: false,
-      questions: [{
-        "property": "flex-direction: row",
-        "correctAnswer": "https://i.imgur.com/Xo1MD86.png",
-        "answers": ["https://i.imgur.com/Xo1MD86.png", "https://i.imgur.com/JIJHnVf.png", "https://i.imgur.com/4y9cZDw.png", "https://i.imgur.com/Id0kLlR.png"],
-        "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using row organizes the items from left to right.",
-        "family-member": "Parent",
-        "model": "Flexbox"
-      },
-      {
-        "property": "flex-direction: column",
-        "correctAnswer": "https://i.imgur.com/JIJHnVf.png",
-        "answers": ["https://i.imgur.com/JIJHnVf.png", "https://i.imgur.com/Xo1MD86.png", "https://i.imgur.com/4y9cZDw.png", "https://i.imgur.com/VdZUG9d.png"],
-        "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using Column organizes the items from top to bottom.",
-        "family-member": "Parent",
-        "model": "Flexbox"
-      },
-      {
-        "property": "flex-direction: row-reverse",
-        "correctAnswer": "https://i.imgur.com/Id0kLlR.png",
-        "answers": ["https://i.imgur.com/Id0kLlR.png", "https://i.imgur.com/JIJHnVf.png", "https://i.imgur.com/4y9cZDw.png", "https://i.imgur.com/Xo1MD86.png"],
-        "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using row reverse organizes the items from right to left.",
-        "family-member": "Parent",
-        "model": "Flexbox"
-      },
-      {
-        "property": "flex-direction: column-reverse",
-        "correctAnswer": "https://i.imgur.com/VdZUG9d.png",
-        "answers": ["https://i.imgur.com/VdZUG9d.png", "https://i.imgur.com/JIJHnVf.png", "https://i.imgur.com/Xo1MD86.png", "https://i.imgur.com/4y9cZDw.png"],
-        "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using column reverse organizes the items from bottom to top.",
-        "family-member": "Parent",
-        "model": "Flexbox"
-      }],
+      questions: [],
       currentQuestion: {},
       randomAnswers: []
     }
+  }
+
+  componentDidMount() {
+    fetch('http://memoize-datasets.herokuapp.com/api/v1/flexboxData')
+      .then(questions => questions.json())
+      .then(parsedQuestions => this.setState({ questions: parsedQuestions.flexboxData }))
+      .catch(err => console.log('Oh No! Something is wrong!', err))
   }
 
   saveToLocalStorage = (key, value) => {
@@ -103,6 +79,8 @@ class App extends Component {
     this.setState({ answeredQuestions: 0 })
     this.setState({ correctAnswers: 0 })
     this.setState({ quizStarted: false });
+    this.saveToLocalStorage('correct', []);
+    this.saveToLocalStorage('incorrect', []);
     this.startQuiz();
   }
 
