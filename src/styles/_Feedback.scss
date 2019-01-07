@@ -22,4 +22,8 @@
   .answer-img {
     margin: 20px;
   }
+
+  .next-btn {
+    @include button($grey, 30px, 20px, 240px)
+  }
 }

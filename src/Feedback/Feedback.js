@@ -12,7 +12,7 @@ function Feedback(props) {
       alt={props.currentQuestion.property}
       key={props.currentQuestion.property}
       onClick={props.checkAnswer} />
-      <button onClick={props.resetAnswerGiven}> Next Question </button>
+      <button className='next-btn' onClick={props.resetAnswerGiven}> Next Question </button>
     </div>
     )
 }
