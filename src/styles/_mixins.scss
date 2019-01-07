@@ -12,3 +12,15 @@
   font-size: $size;
   font-weight: $weight;
 }
+
+@mixin button($background-color, $height, $size, $width) {
+  background-color: $background-color;
+  border: none;
+  border-radius: 5px;
+  color: $text-green;
+  font-family: $primary;
+  font-size: $size;
+  font-weight: 500;
+  height: $height;
+  width: $width;
+}
