@@ -11,8 +11,6 @@ class QuestionCard extends Component {
     }
   }
 
-
-
   checkAnswer = (event) => {
     if(this.props.currentQuestion.correctAnswer === event.target.src) {
       this.setState({ answerCorrect: true });
@@ -36,29 +34,19 @@ class QuestionCard extends Component {
 
   render() {
     return(
-    <div className='question-card'>
-      
+    <div className='question-card'>   
       {!this.state.answerGiven && 
         <Question 
           currentQuestion={this.props.currentQuestion}
           checkAnswer={this.checkAnswer}
           randomAnswers={this.props.randomAnswers}/>
       }
-
-      {this.state.answerGiven && !this.state.answerCorrect &&
+      {this.state.answerGiven && 
         <Feedback 
-          message='Not Quite...'
+          answerCorrect={this.state.answerCorrect}
           resetAnswerGiven={this.resetAnswerGiven}
           currentQuestion={this.props.currentQuestion}/>
       }
-
-      {this.state.answerGiven && this.state.answerCorrect &&
-        <Feedback message='Correct!'
-        resetAnswerGiven={this.resetAnswerGiven}
-        currentQuestion={this.props.currentQuestion}/>
-      }
-
-      
     </div>
     )
   }
