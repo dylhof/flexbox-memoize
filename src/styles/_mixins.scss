@@ -1,0 +1,14 @@
+@mixin divs($boxcolor, $background-color, $height, $width) {
+  box-shadow: 4px 4px 4px $boxcolor;
+  background-color: $background-color;
+  border-radius: 5px;
+  height: $height;
+  width: $width;
+}
+
+@mixin font($color, $size, $weight) {
+  color: $color;
+  font-family: $primary;
+  font-size: $size;
+  font-weight: $weight;
+}
