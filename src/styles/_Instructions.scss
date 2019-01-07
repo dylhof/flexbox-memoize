@@ -1,0 +1,24 @@
+.instructions-div {
+  @include divs($grey, $grey, 300px, 400px);
+  z-index: 2;
+  position: absolute;
+  top: 200px;
+  right: 350px;
+
+  p {
+    @include font($text-green, 30px, 500);
+    text-align: center;
+    margin: 10px auto;
+  }
+
+  li {
+    @include font($text-green, 18px, 400);
+    margin: 0px 15px;
+  }
+
+  .fa-times-circle {
+    color: $text-green;
+    font-size: 30px;
+    margin: 5px 20px;
+  }
+}

@@ -2,9 +2,9 @@ import React from 'react';
 
 function Instructions(props) {
   return (
-    <div>
+    <div >
       {props.showInstructions &&
-      <div>
+      <div className='instructions-div'>
         <p>Instructions</p>
         <ol>
           <li>Click StartQuiz</li>
