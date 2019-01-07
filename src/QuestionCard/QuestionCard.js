@@ -66,6 +66,7 @@ class QuestionCard extends Component {
           <p>{this.props.correctAnswers} Correct Answers</p>
           <p>{this.props.answeredQuestions} Questions Answered</p>
           <button onClick={this.props.resetQuiz}>Restart Quiz!</button>
+          <button onClick={this.props.reviewIncorrect}>Retry questions I got wrong</button>
         </div>
       }
     </div>
