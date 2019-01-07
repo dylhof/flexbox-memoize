@@ -44,7 +44,7 @@ class QuestionCard extends Component {
         <div>
           <button className='start-button' onClick={this.props.newQuestionOrder}>Start New Quiz</button>
           
-          {(this.props.areThereIncorrect !==0) && 
+          {(this.props.areThereIncorrect !== 0) && 
             (this.props.answeredQuestions === this.props.questions) &&
             <button onClick={this.props.reviewIncorrect}>Retry questions I got wrong</button>}
           
