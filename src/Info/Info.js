@@ -2,9 +2,9 @@ import React from 'react';
 
 function Info(props) {
     return (
-      <div>
+      <div className='info-div'>
         {!props.quizStarted && 
-          <div>
+          <div className='aside-instruct-div'>
             <p>Instructions</p>
             <ol>
               <li>Click StartQuiz</li>

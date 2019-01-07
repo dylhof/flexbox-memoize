@@ -1,0 +1,7 @@
+.info-div {
+  @include divs($grey, $card-green, 250px, 200px);
+}
+
+.aside-instruct-div {
+  color: $grey;
+}

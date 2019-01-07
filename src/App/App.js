@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Header/Header.js';
 import Aside from '../Aside/Aside.js';
 import QuestionCard from '../QuestionCard/QuestionCard.js';
-import flexboxData from '../mockData.js';
+// import flexboxData from '../mockData.js';
 
 class App extends Component {
   constructor() {
