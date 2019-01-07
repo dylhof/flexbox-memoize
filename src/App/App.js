@@ -6,60 +6,34 @@ import QuestionCard from '../QuestionCard/QuestionCard.js';
 class App extends Component {
   constructor() {
     super();
+    let storedAnsweredQuestions = 0;
     let storedCorrect = [];
     let storedIncorrect = [];
-    let storedAnsweredQuestions = 0;
     let storedQuestions = [];
+    if (localStorage.getItem('answeredQuestions')) {
+      let storedAnsweredQuestionsString = JSON.parse(localStorage.getItem('answeredQuestions'));
+      storedAnsweredQuestions = parseInt(storedAnsweredQuestionsString);
+    }
     if (localStorage.getItem('correct')) {
       storedCorrect = JSON.parse(localStorage.getItem('correct'));
     }
     if (localStorage.getItem('incorrect')) {
       storedIncorrect = JSON.parse(localStorage.getItem('incorrect'));
     }
-    if (localStorage.getItem('answeredQuestions')) {
-      let storedAnsweredQuestionsString = JSON.parse(localStorage.getItem('answeredQuestions'));
-      storedAnsweredQuestions = parseInt(storedAnsweredQuestionsString);
-    }
     if (localStorage.getItem('questions')) {
       storedQuestions = JSON.parse(localStorage.getItem('questions'))
     }
     this.state = {
-      correct: storedCorrect,
-      incorrect: storedIncorrect,
       answeredQuestions: storedAnsweredQuestions,
+      correct: storedCorrect,
       correctAnswers: storedCorrect.length,
-      endOfQuiz: false,
-      quizStarted: false,
-      showInfo: false,
-      questions: storedQuestions,
-        // {
-        // "property": "flex-direction: row",
-        // "correctAnswer": "https://i.imgur.com/Xo1MD86.png",
-        // "answers": [
-        // "https://i.imgur.com/Xo1MD86.png",
-        // "https://i.imgur.com/JIJHnVf.png",
-        // "https://i.imgur.com/4y9cZDw.png",
-        // "https://i.imgur.com/Id0kLlR.png"
-        // ],
-        // "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using row organizes the items from left to right.",
-        // "family-member": "Parent",
-        // "model": "Flexbox"
-        // },
-        // {
-        // "property": "flex-direction: column",
-        // "correctAnswer": "https://i.imgur.com/JIJHnVf.png",
-        // "answers": [
-        // "https://i.imgur.com/JIJHnVf.png",
-        // "https://i.imgur.com/Xo1MD86.png",
-        // "https://i.imgur.com/4y9cZDw.png",
-        // "https://i.imgur.com/VdZUG9d.png"
-        // ],
-        // "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using Column organizes the items from top to bottom.",
-        // "family-member": "Parent",
-        // "model": "Flexbox"
-        // }],
       currentQuestion: {},
-      randomAnswers: []
+      endOfQuiz: false,
+      incorrect: storedIncorrect,
+      questions: storedQuestions,
+      quizStarted: false,
+      randomAnswers: [],
+      showInfo: false
     }
   }
 
