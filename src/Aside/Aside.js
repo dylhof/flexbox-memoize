@@ -11,7 +11,7 @@ function Aside(props) {
       </div>
       <div className='aside-info-div'>
         <button className='learn-more-btn' >
-          <a href='https://css-tricks.com/snippets/css/a-guide-to-flexbox/' target='_blank'>
+          <a href='https://css-tricks.com/snippets/css/a-guide-to-flexbox/' target='_blank' rel="noopener noreferrer">
             Learn more about flexBox!
           </a>
         </button>
