@@ -9,5 +9,5 @@
 }
 
 .start-button {
-
+  @include button($grey, 70px, 40px, 240px);
 }
