@@ -62,7 +62,9 @@ class App extends Component {
 
   updateQuestion = () => {
     if (this.state.answeredQuestions < this.state.questions.length) {
-      this.setState({ currentQuestion: this.state.questions[this.state.answeredQuestions]})
+      this.setState({ currentQuestion: this.state.questions[this.state.answeredQuestions]}, () => {
+        this.randomAnswers(this.state.currentQuestion.answers)
+      });
     } else {
     this.setState({ endOfQuiz: true });
     }
