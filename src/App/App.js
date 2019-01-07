@@ -2,12 +2,21 @@ import React, { Component } from 'react';
 import Header from '../Header/Header.js';
 import Aside from '../Aside/Aside.js';
 import QuestionCard from '../QuestionCard/QuestionCard.js';
-// import flexboxData from '../mockData.js';
 
 class App extends Component {
   constructor() {
     super();
+    let storedCorrect = [];
+    let storedIncorrect = [];
+    if (localStorage.getItem('correct')) {
+      storedCorrect = JSON.parse(localStorage.getItem('correct'));
+    }
+    if (localStorage.getItem('incorrect')) {
+      storedIncorrect = JSON.parse(localStorage.getItem('incorrect'))
+    }
     this.state = {
+      correct: storedCorrect,
+      incorrect: storedIncorrect,
       answeredQuestions: 0,
       correctAnswers: 0,
       endOfQuiz: false,
@@ -48,6 +57,26 @@ class App extends Component {
       currentQuestion: {},
       randomAnswers: []
     }
+  }
+
+  saveToLocalStorage = (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  setCorrect = (question) => {
+    let newCorrect = this.state.correct.slice();
+    newCorrect.push(question);
+    this.setState({ correct: newCorrect }, () => {
+      this.saveToLocalStorage('correct', this.state.correct)
+    });
+  }
+
+  setIncorrect = (question) => {
+    let newIncorrect = this.state.incorrect.slice();
+    newIncorrect.push(question);
+    this.setState({ incorrect: newIncorrect }, () => {
+      this.saveToLocalStorage('incorrect', this.state.incorrect)
+    });
   }
 
   setAnsweredQuestions = () => {
@@ -124,7 +153,9 @@ class App extends Component {
           questions={this.state.questions.length}
           answeredQuestions={this.state.answeredQuestions}
           correctAnswers={this.state.correctAnswers}
-          randomAnswers={this.state.randomAnswers}/>
+          randomAnswers={this.state.randomAnswers}
+          setCorrect={this.setCorrect}
+          setIncorrect={this.setIncorrect}/>
       
       </div>
     );
