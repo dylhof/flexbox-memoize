@@ -135,8 +135,9 @@ class App extends Component {
   }
 
   updateQuestion = () => {
-    if (this.state.answeredQuestions < this.state.questions.length) {
-      this.setState({ currentQuestion: this.state.questions[this.state.answeredQuestions]}, () => {
+    let {answeredQuestions, questions} = this.state
+    if (answeredQuestions < questions.length) {
+      this.setState({ currentQuestion: questions[answeredQuestions]}, () => {
         this.randomize('randomAnswers', this.state.currentQuestion.answers)
       });
     } else {
@@ -146,48 +147,56 @@ class App extends Component {
   }
 
   render() {
+    let {answeredQuestions, correctAnswers, currentQuestion, showInfo, quizStarted, endOfQuiz, incorrect, questions, randomAnswers} = this.state
     return (
       <div className="App">
         <Header/>  
         <Aside 
-          correctAnswers={this.state.correctAnswers}
-          currentQuestion={this.state.currentQuestion}
-          answeredQuestions={this.state.answeredQuestions}
-          showInfo={this.state.showInfo}
-          quizStarted={this.state.quizStarted}
+          correctAnswers={correctAnswers}
+          currentQuestion={currentQuestion}
+          answeredQuestions={answeredQuestions}
+          showInfo={showInfo}
+          quizStarted={quizStarted}
           toggleShowInfo={this.toggleShowInfo}/>
         
-        {!this.state.quizStarted && !this.state.endOfQuiz &&
+        {!quizStarted && !endOfQuiz &&
         <div>
-          <button className='start-button' onClick={this.newQuestionOrder}>Start New Quiz</button>
+          <button className='start-button' onClick={this.newQuestionOrder}>
+            Start New Quiz
+          </button>
           
-          {(this.state.incorrect.length !== 0) && 
-            (this.answeredQuestions === this.state.questions.length) &&
-            <button onClick={this.reviewIncorrect}>Retry questions I got wrong</button>}
+          {(incorrect.length !== 0) && 
+            (this.answeredQuestions === questions.length) &&
+            <button onClick={this.reviewIncorrect}> 
+              Retry questions I got wrong
+            </button>
+          }
           
-          {(this.state.answeredQuestions > 0) && 
-          (this.state.answeredQuestions < this.state.questions.length) && 
-          <button onClick={this.startFromWhereILeftOff}>Start Quiz Where I left off</button>}
+          {(answeredQuestions > 0) && 
+          (answeredQuestions < questions.length) && 
+          <button onClick={this.startFromWhereILeftOff}>
+            Start Quiz Where I left off
+          </button>}
         </div>
       }
 
-      {this.state.quizStarted && !this.state.endOfQuiz &&
+      {quizStarted && !endOfQuiz &&
         <QuestionCard 
-          currentQuestion={this.state.currentQuestion}
+          currentQuestion={currentQuestion}
           setAnsweredQuestions={this.setAnsweredQuestions}
           setCorrectAnswers={this.setCorrectAnswers}
-          randomAnswers={this.state.randomAnswers}
+          randomAnswers={randomAnswers}
           setCorrect={this.setCorrect}
           setIncorrect={this.setIncorrect}/>
       }
 
-      {this.state.endOfQuiz && 
+      {endOfQuiz && 
         <div> 
           <h3>Your Score:</h3>
-          <p>{this.state.correctAnswers} Correct Answers</p>
-          <p>{this.state.answeredQuestions} Questions Answered</p>
+          <p>{correctAnswers} Correct Answers</p>
+          <p>{answeredQuestions} Questions Answered</p>
           <button onClick={this.newQuestionOrder}>Restart New Quiz!</button>
-          {(this.state.incorrect.length !== 0) && 
+          {(incorrect.length !== 0) && 
           <button onClick={this.reviewIncorrect}>Retry questions I got wrong</button>}
         </div>
       }
