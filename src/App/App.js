@@ -104,7 +104,7 @@ class App extends Component {
   }
 
   removeIncorrect = (question) => {
-    let questionIndex = this.state.questions.findIndex(incorrect => incorrect == question);
+    let questionIndex = this.state.questions.findIndex(incorrect => incorrect.property === question.property);
     if(questionIndex !== -1) {
       let newIncorrect = [...this.state.incorrect];
       newIncorrect.splice(questionIndex, 1);
@@ -123,8 +123,13 @@ class App extends Component {
       answeredQuestions: (this.state.answeredQuestions + 1) 
     }, () => {
     this.updateQuestion();
-    let storedAnsweredQuestions = JSON.stringify(this.state.answeredQuestions);
-    this.saveToLocalStorage('answeredQuestions', (storedAnsweredQuestions))
+    this.saveToLocalStorage('answeredQuestions', (JSON.stringify(this.state.answeredQuestions)))
+    });
+  }
+
+  setCurrentQuestion = () => {
+    this.setState({ currentQuestion: this.state.questions[this.state.answeredQuestions]}, () => {
+      this.randomize('randomAnswers', this.state.currentQuestion.answers)
     });
   }
 
@@ -132,21 +137,22 @@ class App extends Component {
     this.setState({ correctAnswers: (this.state.correctAnswers + 1)}, () => {
       localStorage.setItem('correctAnswers', JSON.stringify(this.state.correctAnswers))
     })
-    
   }
 
   setIncorrect = (question) => {
-    let newIncorrect = this.state.incorrect.slice();
+    let newIncorrect = [...this.state.incorrect];
     newIncorrect.push(question);
     this.setState({ incorrect: newIncorrect }, () => {
       this.saveToLocalStorage('incorrect', this.state.incorrect)
     });
   }
 
+  setInfo = () => {
+    this.setState({ showInfo: false });
+  }
+
   startFromWhereILeftOff = () => {
-    this.setState({ currentQuestion: this.state.questions[this.state.answeredQuestions]}, () => {
-      this.randomize('randomAnswers', this.state.currentQuestion.answers)
-    });
+    this.setCurrentQuestion();
     this.setState({ endOfQuiz: false })
     this.setState({ quizStarted: true });
   }
@@ -158,13 +164,11 @@ class App extends Component {
   updateQuestion = () => {
     let {answeredQuestions, questions} = this.state
     if (answeredQuestions < questions.length) {
-      this.setState({ currentQuestion: questions[answeredQuestions]}, () => {
-        this.randomize('randomAnswers', this.state.currentQuestion.answers)
-      });
+      this.setCurrentQuestion();
     } else {
     this.setState({ endOfQuiz: true });
     }
-    this.setState({ showInfo: false });
+    this.setInfo();
   }
 
   render() {
