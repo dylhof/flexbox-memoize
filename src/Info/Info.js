@@ -15,7 +15,7 @@ function Info(props) {
           </div>
         }
         {props.quizStarted && !props.showInfo && 
-            <div onClick={props.toggleShowInfo}>
+            <div className='show-more-info-div' onClick={props.toggleShowInfo} >
               <p className='show-more-info-p'>
               Click Here to show more info about: 
               </p>

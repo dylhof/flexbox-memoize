@@ -5,6 +5,7 @@ exports[`Info should match the snapshot 1`] = `
   className="info-div"
 >
   <div
+    className="show-more-info-div"
     onClick={[MockFunction]}
   >
     <p

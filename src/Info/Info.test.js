@@ -50,7 +50,7 @@ describe('Info', () => {
   })
 
   it('should call toggleShowInfo when clicked', () => {
-    wrapper.find('.show-more-info-p').simulate('click');
+    wrapper.find('.show-more-info-div').simulate('click');
     expect(toggleShowInfoMock).toBeCalled();
   })
 })
