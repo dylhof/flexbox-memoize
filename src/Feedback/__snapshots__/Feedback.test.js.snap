@@ -1,23 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Feedback should match the snapshot 1`] = `
-<div>
+exports[`Feedback should match the snapshot for a correct answer 1`] = `
+<div
+  className="feedback-div"
+>
   <h3>
-     
-    Correct
-     
+    Correct!
   </h3>
-  <p>
+  <p
+    className="feedback-property-p"
+  >
      
     flex-direction: row
      
   </p>
-  <p>
+  <p
+    className="feedback-info-p"
+  >
      
     This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using row organizes the items from left to right.
      
   </p>
-  <button>
+  <img
+    alt="flex-direction: row"
+    className="answer-img"
+    key="flex-direction: row"
+    src="https://i.imgur.com/Xo1MD86.png"
+  />
+  <button
+    className="next-btn"
+  >
+     Next Question 
+  </button>
+</div>
+`;
+
+exports[`Feedback should match the snapshot for an incorrect answer 1`] = `
+<div
+  className="feedback-div"
+>
+  <h3>
+    Not Quite...
+  </h3>
+  <p
+    className="feedback-property-p"
+  >
+     
+    flex-direction: row
+     
+  </p>
+  <p
+    className="feedback-info-p"
+  >
+     
+    This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using row organizes the items from left to right.
+     
+  </p>
+  <img
+    alt="flex-direction: row"
+    className="answer-img"
+    key="flex-direction: row"
+    src="https://i.imgur.com/Xo1MD86.png"
+  />
+  <button
+    className="next-btn"
+  >
      Next Question 
   </button>
 </div>

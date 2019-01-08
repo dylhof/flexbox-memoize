@@ -2,7 +2,9 @@
 
 exports[`Instructions should match the snapshot 1`] = `
 <div>
-  <div>
+  <div
+    className="instructions-div"
+  >
     <p>
       Instructions
     </p>

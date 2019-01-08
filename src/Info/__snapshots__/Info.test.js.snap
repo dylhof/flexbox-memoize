@@ -1,22 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Info should match the snapshot 1`] = `
-<div>
-  <p
-    className="show-more-info-p"
+<div
+  className="info-div"
+>
+  <div
     onClick={[MockFunction]}
   >
-    Click Here to show more info about:
-    <span>
+    <p
+      className="show-more-info-p"
+    >
+      Click Here to show more info about:
+    </p>
+    <p
+      className="show-more-info-p"
+    >
       flex-direction: row
-    </span>
-  </p>
+    </p>
+  </div>
 </div>
 `;
 
 exports[`Info should match the snapshot 2`] = `
-<div>
-  <div>
+<div
+  className="info-div"
+>
+  <div
+    className="aside-instruct-div"
+  >
     <p>
       Instructions
     </p>
@@ -39,8 +50,12 @@ exports[`Info should match the snapshot 2`] = `
 `;
 
 exports[`Info should match the snapshot 3`] = `
-<div>
-  <div>
+<div
+  className="info-div"
+>
+  <div
+    className="aside-instruct-div"
+  >
     <p>
       Instructions
     </p>

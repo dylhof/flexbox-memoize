@@ -2,9 +2,11 @@
 
 exports[`Aside should match the snapshot 1`] = `
 <aside
-  className="info-aside"
+  className="aside"
 >
-  <div>
+  <div
+    className="aside-score-div"
+  >
     <h3>
       Your Score:
     </h3>
@@ -15,12 +17,15 @@ exports[`Aside should match the snapshot 1`] = `
        Questions Answered
     </p>
   </div>
-  <div>
+  <div
+    className="aside-info-div"
+  >
     <button
       className="learn-more-btn"
     >
       <a
         href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/"
+        rel="noopener noreferrer"
         target="_blank"
       >
         Learn more about flexBox!

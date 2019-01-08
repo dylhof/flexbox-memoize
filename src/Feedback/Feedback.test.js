@@ -12,16 +12,21 @@ const question = {
 }
 
 describe('Feedback', () => {
-  let wrapper;
-  beforeEach(() => {
-    wrapper = shallow(
+  it('should match the snapshot for a correct answer', () => {
+    let wrapper = shallow(
       <Feedback 
-        message='Correct'
+        answerCorrect={true}
         currentQuestion={question}/>
     )
+    expect(wrapper).toMatchSnapshot();
   })
 
-  it('should match the snapshot', () => {
+  it('should match the snapshot for an incorrect answer', () => {
+    let wrapper = shallow(
+      <Feedback 
+        answerCorrect={false}
+        currentQuestion={question}/>
+    )
     expect(wrapper).toMatchSnapshot();
   })
 })
