@@ -46,6 +46,15 @@ class App extends Component {
     }
   }
 
+  fetchQuestions = () => {
+    fetch('http://memoize-datasets.herokuapp.com/api/v1/flexboxData')
+        .then(questions => questions.json())
+        .then(parsedQuestions => this.setState({ questions: parsedQuestions.flexboxData }, () => {
+          this.saveToLocalStorage('questions', this.state.questions)
+        }))
+        .catch(err => console.log('Oh No! Something is wrong!', err))
+  }
+
   newQuestionOrder = () => {
     this.randomize('questions', this.state.questions)
   }
@@ -69,9 +78,9 @@ class App extends Component {
   }
 
   resetQuiz = () => {
+    this.fetchQuestions();
     this.setState({ answeredQuestions: 0 }, this.updateQuestion);
     this.setState({ correctAnswers: 0 })
-    this.setState({ quizStarted: false });
     this.setState({ correct: [] });
     this.setState({ incorrect: [] });
     this.setState({ endOfQuiz: false });
@@ -81,11 +90,31 @@ class App extends Component {
     localStorage.removeItem('answeredQuestions');
   }
 
+  resetForReview = () => {
+    localStorage.setItem('questions', JSON.stringify(this.state.questions));
+    this.setState({ answeredQuestions: 0 }, this.updateQuestion);
+    this.setState({ correctAnswers: 0 })
+    this.setState({ endOfQuiz: false });
+    this.setState({ correct: [] });
+    this.setState({ quizStarted: true });
+    localStorage.removeItem('answeredQuestions');
+  }
+
   reviewIncorrect = () => {
     let incorrectQuestions = localStorage.getItem('incorrect');
     let parsedIncorrectQuestions = JSON.parse(incorrectQuestions);
-    this.setState({ questions: parsedIncorrectQuestions }, 
-      this.resetQuiz);
+    this.setState({ questions: parsedIncorrectQuestions }, this.resetForReview);
+  }
+
+  removeIncorrect = (question) => {
+    let questionIndex = this.state.questions.findIndex(incorrect => incorrect == question);
+    if(questionIndex !== -1) {
+      let newIncorrect = [...this.state.incorrect];
+      newIncorrect.splice(questionIndex, 1);
+      this.setState({ incorrect: newIncorrect }, () => {
+        this.saveToLocalStorage('incorrect', this.state.incorrect)
+      })
+    }
   }
 
   saveToLocalStorage = (key, value) => {
@@ -157,7 +186,8 @@ class App extends Component {
           answeredQuestions={answeredQuestions}
           showInfo={showInfo}
           quizStarted={quizStarted}
-          toggleShowInfo={this.toggleShowInfo}/>
+          toggleShowInfo={this.toggleShowInfo}
+          />
         
         {!quizStarted && !endOfQuiz &&
         <div>
@@ -165,8 +195,8 @@ class App extends Component {
             Start New Quiz
           </button>
           
-          {(incorrect.length !== 0) && 
-            (this.answeredQuestions === questions.length) &&
+          {(incorrect.length > 0) && 
+            (answeredQuestions === questions.length) &&
             <button onClick={this.reviewIncorrect}> 
               Retry questions I got wrong
             </button>
@@ -187,7 +217,8 @@ class App extends Component {
           setCorrectAnswers={this.setCorrectAnswers}
           randomAnswers={randomAnswers}
           setCorrect={this.setCorrect}
-          setIncorrect={this.setIncorrect}/>
+          setIncorrect={this.setIncorrect}
+          removeIncorrect={this.removeIncorrect}/>
       }
 
       {endOfQuiz && 
@@ -196,7 +227,7 @@ class App extends Component {
           <p>{correctAnswers} Correct Answers</p>
           <p>{answeredQuestions} Questions Answered</p>
           <button onClick={this.newQuestionOrder}>Restart New Quiz!</button>
-          {(incorrect.length !== 0) && 
+          {(incorrect.length > 0) && 
           <button onClick={this.reviewIncorrect}>Retry questions I got wrong</button>}
         </div>
       }

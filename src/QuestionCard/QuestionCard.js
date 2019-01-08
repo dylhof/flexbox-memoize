@@ -12,13 +12,15 @@ class QuestionCard extends Component {
   }
 
   checkAnswer = (event) => {
+    let {currentQuestion} = this.props
     if(this.props.currentQuestion.correctAnswer === event.target.src) {
       this.setState({ answerCorrect: true });
-      this.props.setCorrect(this.props.currentQuestion);
+      this.props.setCorrect(currentQuestion);
       this.props.setCorrectAnswers();
+      this.props.removeIncorrect(currentQuestion)
     } else { 
       this.setState({ answerCorrect: false })
-      this.props.setIncorrect(this.props.currentQuestion);
+      this.props.setIncorrect(currentQuestion);
     };
     this.setAnswerGiven();
   }
