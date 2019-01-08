@@ -15,7 +15,6 @@ class QuestionCard extends Component {
     let {currentQuestion} = this.props
     if(this.props.currentQuestion.correctAnswer === event.target.src) {
       this.setState({ answerCorrect: true });
-      this.props.setCorrect(currentQuestion);
       this.props.setCorrectAnswers();
       this.props.removeIncorrect(currentQuestion)
     } else { 

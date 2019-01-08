@@ -7,15 +7,15 @@ class App extends Component {
   constructor() {
     super();
     let storedAnsweredQuestions = 0;
-    let storedCorrect = [];
+    let storedCorrectAnswers = 0;
     let storedIncorrect = [];
     let storedQuestions = [];
     if (localStorage.getItem('answeredQuestions')) {
       let storedAnsweredQuestionsString = JSON.parse(localStorage.getItem('answeredQuestions'));
       storedAnsweredQuestions = parseInt(storedAnsweredQuestionsString);
     }
-    if (localStorage.getItem('correct')) {
-      storedCorrect = JSON.parse(localStorage.getItem('correct'));
+    if (localStorage.getItem('correctAnswers')) {
+      storedCorrectAnswers = JSON.parse(localStorage.getItem('correctAnswers'));
     }
     if (localStorage.getItem('incorrect')) {
       storedIncorrect = JSON.parse(localStorage.getItem('incorrect'));
@@ -25,8 +25,7 @@ class App extends Component {
     }
     this.state = {
       answeredQuestions: storedAnsweredQuestions,
-      correct: storedCorrect,
-      correctAnswers: storedCorrect.length,
+      correctAnswers: storedCorrectAnswers,
       currentQuestion: {},
       endOfQuiz: false,
       incorrect: storedIncorrect,
@@ -81,7 +80,6 @@ class App extends Component {
     this.fetchQuestions();
     this.setState({ answeredQuestions: 0 }, this.updateQuestion);
     this.setState({ correctAnswers: 0 })
-    this.setState({ correct: [] });
     this.setState({ incorrect: [] });
     this.setState({ endOfQuiz: false });
     this.setState({ quizStarted: true });
@@ -95,7 +93,6 @@ class App extends Component {
     this.setState({ answeredQuestions: 0 }, this.updateQuestion);
     this.setState({ correctAnswers: 0 })
     this.setState({ endOfQuiz: false });
-    this.setState({ correct: [] });
     this.setState({ quizStarted: true });
     localStorage.removeItem('answeredQuestions');
   }
@@ -131,16 +128,11 @@ class App extends Component {
     });
   }
 
-  setCorrect = (question) => {
-    let newCorrect = this.state.correct.slice();
-    newCorrect.push(question);
-    this.setState({ correct: newCorrect }, () => {
-      this.saveToLocalStorage('correct', this.state.correct)
-    });
-  }
-
   setCorrectAnswers = () => {
-    this.setState({ correctAnswers: (this.state.correctAnswers + 1)})
+    this.setState({ correctAnswers: (this.state.correctAnswers + 1)}, () => {
+      localStorage.setItem('correctAnswers', JSON.stringify(this.state.correctAnswers))
+    })
+    
   }
 
   setIncorrect = (question) => {
@@ -216,7 +208,6 @@ class App extends Component {
           setAnsweredQuestions={this.setAnsweredQuestions}
           setCorrectAnswers={this.setCorrectAnswers}
           randomAnswers={randomAnswers}
-          setCorrect={this.setCorrect}
           setIncorrect={this.setIncorrect}
           removeIncorrect={this.removeIncorrect}/>
       }
