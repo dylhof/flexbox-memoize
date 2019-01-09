@@ -17,7 +17,7 @@ aside {
   }
 
   p {
-    @include font($text-green, 20px, 400);
+    @include font($text-green, 19px, 400);
     text-align: left;
     margin-left: 20px
   }
