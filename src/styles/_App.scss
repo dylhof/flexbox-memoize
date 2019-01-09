@@ -9,3 +9,25 @@
   grid-template-areas: 'header header'
                        'aside question';
 }
+
+
+.button-div {
+  @include divs($grey, $card-green, 500px, 700px);
+  grid-area: question;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.left-off-button,
+.wrong-button {
+  @include button($grey, 70px, 30px, 450px);
+  margin: 20px;
+}
+
+.start-button {
+  @include button($grey, 70px, 40px, 345px);
+  margin: 20px;
+}

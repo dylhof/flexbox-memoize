@@ -190,7 +190,7 @@ class App extends Component {
           />
         
         {!quizStarted && !endOfQuiz &&
-        <div>
+        <div className='button-div'>
           <button className='start-button' onClick={this.newQuestionOrder}>
             Start New Quiz
           </button>
@@ -204,7 +204,7 @@ class App extends Component {
           
           {(answeredQuestions > 0) && 
           (answeredQuestions < questions.length) && 
-          <button onClick={this.startFromWhereILeftOff}>
+          <button className='left-off-button' onClick={this.startFromWhereILeftOff}>
             Start Quiz Where I left off
           </button>}
         </div>
@@ -221,13 +221,13 @@ class App extends Component {
       }
 
       {endOfQuiz && 
-        <div> 
+        <div className='button-div'> 
           <h3>Your Score:</h3>
           <p>{correctAnswers} Correct Answers</p>
           <p>{answeredQuestions} Questions Answered</p>
-          <button onClick={this.newQuestionOrder}>Restart New Quiz!</button>
+          <button className='start-button' fonClick={this.newQuestionOrder}>Start New Quiz!</button>
           {(incorrect.length > 0) && 
-          <button onClick={this.reviewIncorrect}>Retry questions I got wrong</button>}
+          <button className='wrong-button' onClick={this.reviewIncorrect}>Retry questions I got wrong</button>}
         </div>
       }
       </div>
