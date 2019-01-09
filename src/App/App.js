@@ -227,7 +227,7 @@ class App extends Component {
             <p>{correctAnswers} Correct Answers</p>
             <p>{answeredQuestions} Questions Answered</p>
           </div>
-          <button className='start-button' fonClick={this.newQuestionOrder}>Start New Quiz!</button>
+          <button className='start-button' onClick={this.newQuestionOrder}>Start New Quiz!</button>
           {(incorrect.length > 0) && 
           <button className='wrong-button' onClick={this.reviewIncorrect}>Retry questions I got wrong</button>}
         </div>

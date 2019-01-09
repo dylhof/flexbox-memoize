@@ -25,5 +25,7 @@
   width: $width;
   &:hover {
     box-shadow: inset 0px 0px 0px 3px $text-green;
+    cursor: pointer;
+    transition-duration: .5s;
   }
 }

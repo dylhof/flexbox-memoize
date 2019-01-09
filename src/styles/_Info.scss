@@ -12,6 +12,14 @@
   padding-left: 17px;
 }
 
+.show-more-info-div{
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    transition-duration: .5s;
+  }
+}
+
 .show-more-info-p {
   @include font($text-green, 20px, 500);
   text-align: center;

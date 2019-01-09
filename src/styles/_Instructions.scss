@@ -20,5 +20,10 @@
     color: $text-green;
     font-size: 30px;
     margin: 5px 20px;
+    &:hover {
+      transform: scale(1.1);
+      cursor: pointer;
+      transition-duration: .5s;
+    }
   }
 }
