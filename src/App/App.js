@@ -92,7 +92,7 @@ class App extends Component {
     localStorage.setItem('questions', JSON.stringify(this.state.questions));
     this.setState({ answeredQuestions: 0 }, this.updateQuestion);
     this.setState({ correctAnswers: 0 })
-    this.setSetEndOfQuiz(false);
+    this.setEndOfQuiz(false);
     this.setState({ quizStarted: true });
     localStorage.removeItem('answeredQuestions');
   }
@@ -221,10 +221,12 @@ class App extends Component {
       }
 
       {endOfQuiz && 
-        <div className='button-div'> 
-          <h3>Your Score:</h3>
-          <p>{correctAnswers} Correct Answers</p>
-          <p>{answeredQuestions} Questions Answered</p>
+        <div className='button-div'>
+          <div className='score-div'> 
+            <h3>Your Score:</h3>
+            <p>{correctAnswers} Correct Answers</p>
+            <p>{answeredQuestions} Questions Answered</p>
+          </div>
           <button className='start-button' fonClick={this.newQuestionOrder}>Start New Quiz!</button>
           {(incorrect.length > 0) && 
           <button className='wrong-button' onClick={this.reviewIncorrect}>Retry questions I got wrong</button>}

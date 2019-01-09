@@ -4,7 +4,7 @@ import Info from '../Info/Info.js';
 function Aside(props) {
   return (
     <aside className='aside'>
-      <div className='aside-score-div'> 
+      <div className='score-div'> 
         <h3>Your Score:</h3>
         <p>{props.correctAnswers} Correct Answers</p>
         <p>{props.answeredQuestions} Questions Answered</p>

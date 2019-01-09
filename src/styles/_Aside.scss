@@ -2,12 +2,13 @@ aside {
   grid-area: aside;
 }
 
-.aside-score-div {
+.score-div {
   @include divs($grey, $grey, 200px, 250px);
   display: flex;
   margin: 20px;
   justify-content: center;
   flex-direction: column;
+  z-index: 2;
 
   h3 {
     @include font($text-green, 35px, 500);

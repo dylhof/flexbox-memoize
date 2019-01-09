@@ -1,6 +1,6 @@
 .instructions-div {
   @include divs($grey, $grey, 300px, 400px);
-  z-index: 2;
+  z-index: 3  ;
   position: absolute;
   top: 200px;
   right: 350px;
