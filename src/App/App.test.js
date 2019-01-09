@@ -3,27 +3,29 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { shallow } from 'enzyme';
 
-
-// const questions = [{
-//   "property": "flex-direction: row",
-//   "correctAnswer": "https://i.imgur.com/Xo1MD86.png",
-//   "answers": ["https://i.imgur.com/Xo1MD86.png", "https://i.imgur.com/JIJHnVf.png", "https://i.imgur.com/4y9cZDw.png", "https://i.imgur.com/Id0kLlR.png"],
-//   "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using row organizes the items from left to right.",
-// },
-// {
-//   "property": "flex-direction: column",
-//   "correctAnswer": "https://i.imgur.com/JIJHnVf.png",
-//   "answers": ["https://i.imgur.com/JIJHnVf.png", "https://i.imgur.com/Xo1MD86.png", "https://i.imgur.com/4y9cZDw.png", "https://i.imgur.com/VdZUG9d.png"],
-//   "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using Column organizes the items from top to bottom.",
-// }]
-
 describe('App', () => {
   let wrapper;
   beforeEach(() => {
+    // localStorage.setItem('incorrect', [{"property": "flex-direction: row"}])
     wrapper = shallow(
       <App />
     );
+    wrapper.setState({ answeredQuestions: 0 })
   });
+
+  afterEach(() => {
+    localStorage.clear()
+  })
+
+  // it('should set local storage', () => {
+  //   let incorrect = {"property": "flex-direction: column"}
+  //   let itemsInStorage = JSON.parse(localStorage.getItem('incorrect'));
+  //   expect(itemsInStorage).toEqual([{"property": "flex-direction: row"}])
+
+  //   wrapper.instance().saveToLocalStorage("incorrect", [{"property": "flex-direction: row"}, incorrect])
+  //   itemsInStorage = JSON.parse(localStorage.getItem('incorrect'))
+  //   expect(itemsInStorage).toEqual[{"property": "flex-direction: row"}, {"property": "flex-direction: column"}]
+  // })
 
 
   it('renders without crashing', () => {
@@ -41,17 +43,20 @@ describe('App', () => {
   });
 
   it('should updtate the quesiton to the next question in the array', () => {
-    expect(wrapper.state('currentQuestion')).toEqual(wrapper.state.questions[0]);
-    wrapper.instance().setAnsweredQuestions();
+    wrapper.setState({
+      questions: [{"property": "flex-direction: row"}, {"property": "flex-direction: column"}]
+    })
+    wrapper.instance().randomize = jest.fn();
+    expect(wrapper.state('currentQuestion')).toEqual({});
     wrapper.instance().updateQuestion();
-    expect(wrapper.state('currentQuestion')).toEqual(wrapper.state.questions[1])
+    expect(wrapper.state('currentQuestion')).toEqual(wrapper.state().questions[0])
   })
 
   it('should set the end of quiz', () => {
     wrapper.instance().setAnsweredQuestions();
     expect(wrapper.state('answeredQuestions')).toEqual(1);
     expect(wrapper.state('endOfQuiz')).toEqual(false);
-    wrapper.instance().setEndOfQuiz();
+    wrapper.instance().setEndOfQuiz(true);
     expect(wrapper.state('answeredQuestions')).toEqual(0);
     expect(wrapper.state('endOfQuiz')).toEqual(true);
   });
@@ -65,11 +70,15 @@ describe('App', () => {
   });
 
   it('should start the quiz', () => {
-    wrapper.instance().setEndOfQuiz();
-    expect(wrapper.state('endofQuiz')).toEqual(true);
+    wrapper.instance().updateQuestion = jest.fn();
+    wrapper.instance().fetchQuestions = jest.fn();
+    wrapper.instance().setEndOfQuiz(true);
+    wrapper.instance().setAnsweredQuestions();
+    expect(wrapper.state('answeredQuestions')).toEqual(1);
+    expect(wrapper.state('endOfQuiz')).toEqual(true);
     expect(wrapper.state('quizStarted')).toEqual(false);
-    wrapper.instance().startQuiz();
-    expect(wrapper.state('endofQuiz')).toEqual(false);
+    wrapper.instance().resetQuiz();
+    expect(wrapper.state('endOfQuiz')).toEqual(false);
     expect(wrapper.state('quizStarted')).toEqual(true);
   });
 

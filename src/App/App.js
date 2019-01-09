@@ -92,7 +92,7 @@ class App extends Component {
     localStorage.setItem('questions', JSON.stringify(this.state.questions));
     this.setState({ answeredQuestions: 0 }, this.updateQuestion);
     this.setState({ correctAnswers: 0 })
-    this.setState({ endOfQuiz: false });
+    this.setSetEndOfQuiz(false);
     this.setState({ quizStarted: true });
     localStorage.removeItem('answeredQuestions');
   }
@@ -127,6 +127,10 @@ class App extends Component {
     });
   }
 
+  setEndOfQuiz = (value) => {
+    this.setState({ endOfQuiz: value })
+  }
+
   setCurrentQuestion = () => {
     this.setState({ currentQuestion: this.state.questions[this.state.answeredQuestions]}, () => {
       this.randomize('randomAnswers', this.state.currentQuestion.answers)
@@ -153,7 +157,7 @@ class App extends Component {
 
   startFromWhereILeftOff = () => {
     this.setCurrentQuestion();
-    this.setState({ endOfQuiz: false })
+    this.setEndOfQuiz(false);
     this.setState({ quizStarted: true });
   }
 
@@ -166,7 +170,7 @@ class App extends Component {
     if (answeredQuestions < questions.length) {
       this.setCurrentQuestion();
     } else {
-    this.setState({ endOfQuiz: true });
+      this.setEndOfQuiz(true);
     }
     this.setInfo();
   }
