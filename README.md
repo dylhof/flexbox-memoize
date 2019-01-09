@@ -1,68 +1,29 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# [FlexboxQuiz](https://dylhof.github.io/flexbox-memoize/)
 
-## Available Scripts
+Ever get confused between align-items and align-content? Can't keep flex-start and flex-end straigt? FlexboxQuiz is a helpful study aide for those who need to brush up on their flexbox properties.  With over thirty questions with 4 possible answers each, this quiz will truly test your knowledge!  Don't have time to finish the quiz? We keep track of where you are in the quiz so you can come right back.  We also keep track of the answers you get wrong so you can get some extra practice with those properties.  Come learn flexbox with FexboxQuiz!
 
-In the project directory, you can run:
+## How to use the app:
+  ### As a User:
+  - Navigate to [this link](https://dylhof.github.io/flexbox-memoize/) to start using FlexboxQuiz.
+  - From there, simply click the Start New Quiz button
+  - Click on the Image that is closest to what would be produced with the named flexbox property
+  - If you get stuck, checkout the side bar for a helpful description of the property
+  - Come back to the site to finish the quiz or review incorrect answers
+  
+  ### As a Contributor: 
+  - This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  1. Open Terminal
+  2. Change the current working directory to the location where you want the cloned directory to be made
+  3. Run `git clone https://github.com/dylhof/flexbox-memoize.git` - Your local clone will be created
+  4. Run `cd flexbox-memoize`
+  5. Run `npm install`
 
-### `npm start`
+<img width="1136" alt="flexboxquiz-question" src="https://user-images.githubusercontent.com/37079656/50879593-ad012180-1398-11e9-885c-fb2d16dbb862.png">
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<img width="1137" alt="flexboxquiz-feedback" src="https://user-images.githubusercontent.com/37079656/50879613-bbe7d400-1398-11e9-95c1-a7659d2e6ca2.png">
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- See GitHub issues for future development plans
 
-### `npm test`
+## Contributors:
+- Dylan Hofmann [@dylhof](https://github.com/dylhof)
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
