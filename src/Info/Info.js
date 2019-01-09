@@ -6,7 +6,7 @@ function Info(props) {
         {!props.quizStarted && 
           <div className='aside-instruct-div'>
             <p>Instructions</p>
-            <ol>
+            <ol className='instructions-ol'>
               <li>Click StartQuiz</li>
               <li>Choose the image that may be produced if the named flexbox property were in your CSS</li>
               <li>If you get stuck, check back here to get more information about the flexbox property</li>

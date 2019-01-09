@@ -197,7 +197,7 @@ class App extends Component {
           
           {(incorrect.length > 0) && 
             (answeredQuestions === questions.length) &&
-            <button onClick={this.reviewIncorrect}> 
+            <button className='wrong-button' onClick={this.reviewIncorrect}> 
               Retry questions I got wrong
             </button>
           }
