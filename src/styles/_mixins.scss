@@ -23,4 +23,7 @@
   font-weight: 500;
   height: $height;
   width: $width;
+  &:hover {
+    box-shadow: inset 0px 0px 0px 3px $text-green;
+  }
 }
