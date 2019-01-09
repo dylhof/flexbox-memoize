@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QuestionCard should match the snapshot 1`] = `
+<div
+  className="question-card"
+>
+  <Question
+    checkAnswer={[Function]}
+    currentQuestion={
+      Object {
+        "answers": Array [
+          "https://i.imgur.com/Xo1MD86.png",
+          "https://i.imgur.com/JIJHnVf.png",
+          "https://i.imgur.com/4y9cZDw.png",
+          "https://i.imgur.com/Id0kLlR.png",
+        ],
+        "correctAnswer": "https://i.imgur.com/Xo1MD86.png",
+        "info": "This establishes the main-axis, thus defining the direction flex items are placed in the flex container. Using row organizes the items from left to right.",
+        "property": "flex-direction: row",
+      }
+    }
+  />
+</div>
+`;
